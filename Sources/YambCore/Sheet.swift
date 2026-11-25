@@ -34,6 +34,12 @@ public struct Sheet: Codable, Equatable, Sendable {
         return cells
     }
 
+    /// Cells that may be filled in sheet-only mode (real dice): the same order rules,
+    /// but empty Announce cells are always open, since the players handle announcing at the table.
+    public var sheetOnlyAllowedCells: [Cell] {
+        allowedCells(announced: nil) + announceableRows.map { Cell(.announce, $0) }
+    }
+
     /// Rows that can still be announced (empty cells in the Announce column).
     public var announceableRows: [Row] {
         Row.allCases.filter { self[.announce, $0] == nil }

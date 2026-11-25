@@ -11,6 +11,8 @@ struct SheetView: View {
     let announced: Row?
     /// Show what each allowed cell would score. When off, allowed cells are only highlighted.
     var showPreviews = true
+    /// Sheet-only mode: filled cells can be tapped to change or clear them.
+    var filledCellsEditable = false
     var rowHeight: CGFloat = 27
     let onTap: (Cell) -> Void
 
@@ -93,7 +95,8 @@ struct SheetView: View {
     }
 
     private func blank() -> some View {
-        Color.clear.frame(width: 58, height: rowHeight).overlay(Rectangle().strokeBorder(Theme.grid, lineWidth: 0.5))
+        // The Σ column only has cells on the sum rows and the total.
+        Color.clear.frame(width: 58, height: rowHeight)
     }
 
     private func sumCells(_ title: String, total: Int, value: (Column) -> Int?) -> some View {
@@ -123,7 +126,9 @@ struct SheetView: View {
         let isAnnounced = cell.column == .announce && cell.row == announced
 
         // Not `.disabled`: that would grey out written scores. Taps on other cells are ignored instead.
-        Button { if option != nil || canAnnounce { onTap(cell) } } label: {
+        Button {
+            if option != nil || canAnnounce || (filledCellsEditable && entry != nil) { onTap(cell) }
+        } label: {
             ZStack {
                 if let entry {
                     switch entry {

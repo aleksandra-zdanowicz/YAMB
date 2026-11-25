@@ -81,6 +81,25 @@ group("Yamb") {
     check(s(.yamb, [6, 6, 6, 6, 1, 1]), nil, "four of a kind is not yamb")
 }
 
+group("Possible scores (sheet-only picker)") {
+    check(Scoring.possibleScores(.fours), [0, 4, 8, 12, 16, 20], "4s")
+    check(Scoring.possibleScores(.max), Array(5...30), "max")
+    check(Scoring.possibleScores(.quint), [46, 56, 66], "quint")
+    check(Scoring.possibleScores(.poker), [44, 48, 52, 56, 60, 64], "poker")
+    check(Scoring.possibleScores(.yamb), [55, 60, 65, 70, 75, 80], "yamb")
+    let full = Scoring.possibleScores(.full)
+    check(full.first, 37, "lowest full: 1-1-1-2-2")
+    check(full.last, 58, "highest full: 6-6-6-5-5")
+    check(full.contains(35), false, "five 1s is not a full")
+}
+
+group("Sheet-only allowed cells") {
+    var sheet = Sheet()
+    check(sheet.sheetOnlyAllowedCells.count, 1 + 12 + 1 + 12, "down + free + up + all announce")
+    sheet.set(.score(75), at: Cell(.announce, .yamb))
+    check(sheet.sheetOnlyAllowedCells.contains(Cell(.announce, .yamb)), false, "filled announce cell closed")
+}
+
 // MARK: - Sheet & totals
 
 /// Basha's real sheet. X = crossed out.

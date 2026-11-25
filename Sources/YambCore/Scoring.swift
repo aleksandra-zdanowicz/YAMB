@@ -68,6 +68,33 @@ public enum Scoring {
         return pick?.0
     }
 
+    /// Every score a row can actually get (X not included), sorted low to high.
+    /// Used by sheet-only mode so only valid scores can be entered.
+    public static func possibleScores(_ row: Row) -> [Int] {
+        possibleScoreTable[row] ?? []
+    }
+
+    private static let possibleScoreTable: [Row: [Int]] = {
+        var table: [Row: Set<Int>] = [:]
+        var dice = [1, 1, 1, 1, 1]
+        func visit(_ i: Int) {
+            if i == 5 {
+                for row in Row.allCases {
+                    for roll in 1...3 {
+                        if let s = score(row, fiveDice: dice, rollNumber: roll) { table[row, default: []].insert(s) }
+                    }
+                }
+                return
+            }
+            for face in 1...6 {
+                dice[i] = face
+                visit(i + 1)
+            }
+        }
+        visit(0)
+        return table.mapValues { $0.sorted() }
+    }()
+
     // MARK: - Helpers
 
     /// counts[f] = how many dice show face f (index 0 unused).

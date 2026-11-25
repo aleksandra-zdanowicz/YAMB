@@ -10,6 +10,7 @@
 		26674C519FF164E38FB6FB05 /* DieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D037E83A0E685C7A8DF96E /* DieView.swift */; };
 		337F28D8FEABC0CF86C0C8F6 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7196ADFEED9D53C913B59B8D /* SheetView.swift */; };
 		3CC241EDA1557DABC42C32D1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B01780C7880B77D3AB03B8F /* Theme.swift */; };
+		4705CBC93BE96D5A9D361F51 /* ScorePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA052A4C1561875EEDBA9E0 /* ScorePickerView.swift */; };
 		4E3A864D1ACD77956F78BB80 /* YambCore in Frameworks */ = {isa = PBXBuildFile; productRef = A2C53CC1C0626C56773489A8 /* YambCore */; };
 		82F7AB04C7597ACFC846FAF4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B0F93C1D2E178CB4C26A17 /* GameView.swift */; };
 		AA046C8CC0AF781867829D16 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F13489DFCC26990CCDF155 /* GameModel.swift */; };
@@ -23,6 +24,7 @@
 		5A71E64934B661AD5A9CB020 /* Yamb.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Yamb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B01780C7880B77D3AB03B8F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7196ADFEED9D53C913B59B8D /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		9EA052A4C1561875EEDBA9E0 /* ScorePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePickerView.swift; sourceTree = "<group>"; };
 		C9F13489DFCC26990CCDF155 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		E9D037E83A0E685C7A8DF96E /* DieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +55,7 @@
 				E9D037E83A0E685C7A8DF96E /* DieView.swift */,
 				C9F13489DFCC26990CCDF155 /* GameModel.swift */,
 				09B0F93C1D2E178CB4C26A17 /* GameView.swift */,
+				9EA052A4C1561875EEDBA9E0 /* ScorePickerView.swift */,
 				7196ADFEED9D53C913B59B8D /* SheetView.swift */,
 				5B01780C7880B77D3AB03B8F /* Theme.swift */,
 				1783FE14EB4456E1FA3BA652 /* YambApp.swift */,
@@ -143,6 +146,7 @@
 				26674C519FF164E38FB6FB05 /* DieView.swift in Sources */,
 				AA046C8CC0AF781867829D16 /* GameModel.swift in Sources */,
 				82F7AB04C7597ACFC846FAF4 /* GameView.swift in Sources */,
+				4705CBC93BE96D5A9D361F51 /* ScorePickerView.swift in Sources */,
 				337F28D8FEABC0CF86C0C8F6 /* SheetView.swift in Sources */,
 				3CC241EDA1557DABC42C32D1 /* Theme.swift in Sources */,
 				E29DD36932306BC447881EB6 /* YambApp.swift in Sources */,

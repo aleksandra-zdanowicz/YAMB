@@ -53,7 +53,7 @@ On iPad and Mac there's more room, so the dice and the sheet sit side by side.
 ## Open decisions
 
 - ~~Online technology~~ **Decided: Apple Game Center.** All players are on Apple devices. It handles sign-in, invites, turns and live watching, and it needs no server.
-- **Sheet-only input:** typing the 5 dice values vs typing the score directly.
+- ~~Sheet-only input~~ **Decided: tap a cell and pick from the scores that are possible for that row.** Filled cells can be corrected or cleared.
 
 ## Prerequisites
 

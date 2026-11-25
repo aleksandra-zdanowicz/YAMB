@@ -7,14 +7,27 @@ struct GameView: View {
 
     @State private var pendingCell: Cell?
     @State private var confirmNewGame = false
+    @State private var pickingCell: Cell?
     @AppStorage("showScorePreviews") private var showPreviews = true
+
+    private var sheetOnly: Bool { model.mode == .sheetOnly }
 
     var body: some View {
         GeometryReader { geo in
             let wide = geo.size.width > 760
             VStack(spacing: 0) {
                 topBar
-                if wide {
+                if sheetOnly {
+                    // Real dice: just the sheet, as big as fits.
+                    ScrollView {
+                        sheet(rowHeight: max(26, min(44, (geo.size.height - 150) / 17.5)))
+                            .frame(maxWidth: 600)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 8)
+                } else if wide {
                     HStack(alignment: .top, spacing: 32) {
                         VStack(spacing: 20) {
                             dice
@@ -43,11 +56,19 @@ struct GameView: View {
         .confirmationDialog(dialogTitle, isPresented: dialogBinding, titleVisibility: .visible, presenting: pendingCell) { cell in
             dialogButtons(cell)
         }
-        .alert("Start a new game?", isPresented: $confirmNewGame) {
-            Button("New game", role: .destructive) { model.newGame() }
+        .confirmationDialog("New game", isPresented: $confirmNewGame, titleVisibility: .visible) {
+            Button("Play with app dice") { model.newGame(.appDice) }
+            Button("Sheet only (real dice)") { model.newGame(.sheetOnly) }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("The current game will be lost.")
+            Text(model.game.isFinished || model.sheet.entries.isEmpty
+                 ? "How do you want to play?"
+                 : "How do you want to play? The current game will be lost.")
+        }
+        .sheet(item: $pickingCell) { cell in
+            ScorePickerView(cell: cell, current: model.sheet[cell.column, cell.row]) { entry in
+                model.setEntry(entry, at: cell)
+            }
         }
     }
 
@@ -141,9 +162,10 @@ struct GameView: View {
                   options: model.options,
                   announceable: model.announceable,
                   announced: model.turn.announced,
-                  showPreviews: showPreviews,
+                  showPreviews: showPreviews && !sheetOnly,
+                  filledCellsEditable: sheetOnly,
                   rowHeight: rowHeight) { cell in
-            pendingCell = cell
+            if sheetOnly { pickingCell = cell } else { pendingCell = cell }
         }
     }
 
@@ -152,7 +174,12 @@ struct GameView: View {
             if model.game.isFinished {
                 Text("Game over · \(model.sheet.total) points").font(.headline)
                 Spacer()
-                Button("New game") { model.newGame() }.buttonStyle(.borderedProminent).tint(Theme.accent)
+                Button("New game") { confirmNewGame = true }.buttonStyle(.borderedProminent).tint(Theme.accent)
+            } else if sheetOnly {
+                Label("Sheet only · real dice", systemImage: "list.bullet.rectangle")
+                    .font(.headline)
+                Spacer()
+                Text("Tap a cell to write").font(.subheadline).foregroundStyle(.secondary)
             } else {
                 Text("Your turn").font(.headline)
                 Spacer()
