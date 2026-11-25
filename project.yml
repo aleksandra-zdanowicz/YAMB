@@ -1,0 +1,41 @@
+# Xcode project definition. Regenerate Yamb.xcodeproj with:  xcodegen
+name: Yamb
+options:
+  bundleIdPrefix: com.aleksandrazdanowicz
+  deploymentTarget:
+    iOS: "17.0"
+    macOS: "14.0"
+  createIntermediateGroups: true
+
+packages:
+  YambCore:
+    path: .
+
+settings:
+  base:
+    MARKETING_VERSION: "0.1"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+
+targets:
+  Yamb:
+    type: application
+    supportedDestinations: [iOS, macOS]
+    sources: [App]
+    dependencies:
+      - package: YambCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aleksandrazdanowicz.yamb
+        PRODUCT_NAME: Yamb
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Yamb
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.board-games
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY[sdk=macosx*]: "-"
+        ENABLE_HARDENED_RUNTIME: NO
+        ENABLE_PREVIEWS: YES
