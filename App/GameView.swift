@@ -7,6 +7,7 @@ struct GameView: View {
 
     @State private var pendingCell: Cell?
     @State private var confirmNewGame = false
+    @AppStorage("showScorePreviews") private var showPreviews = true
 
     var body: some View {
         GeometryReader { geo in
@@ -56,6 +57,10 @@ struct GameView: View {
         HStack {
             Menu {
                 Button("New game", systemImage: "arrow.counterclockwise") { confirmNewGame = true }
+                Divider()
+                Toggle(isOn: $showPreviews) {
+                    Label("Show score previews", systemImage: "lightbulb")
+                }
             } label: {
                 Image(systemName: "line.3.horizontal")
                     .font(.title3.weight(.semibold))
@@ -136,6 +141,7 @@ struct GameView: View {
                   options: model.options,
                   announceable: model.announceable,
                   announced: model.turn.announced,
+                  showPreviews: showPreviews,
                   rowHeight: rowHeight) { cell in
             pendingCell = cell
         }

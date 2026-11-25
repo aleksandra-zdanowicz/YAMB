@@ -9,6 +9,8 @@ struct SheetView: View {
     /// Announce cells that can be tapped to announce.
     let announceable: Set<Cell>
     let announced: Row?
+    /// Show what each allowed cell would score. When off, allowed cells are only highlighted.
+    var showPreviews = true
     var rowHeight: CGFloat = 27
     let onTap: (Cell) -> Void
 
@@ -128,7 +130,7 @@ struct SheetView: View {
                     case .score(let v): Text("\(v)")
                     case .crossed: Text("X").foregroundStyle(.secondary)
                     }
-                } else if let option {
+                } else if showPreviews, let option {
                     Text(option.map(String.init) ?? "X")
                         .foregroundStyle(Theme.accent.opacity(option == nil ? 0.5 : 0.85))
                 } else if canAnnounce {
