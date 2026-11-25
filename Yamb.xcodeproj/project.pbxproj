@@ -7,24 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050E01CD98F10B3A7290BD09 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D8BE0DAA276A76BFF245A /* Feedback.swift */; };
+		2156B4C786BBFCD8363D8DD1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B64453A02E676A93C9DCDD0 /* SettingsView.swift */; };
 		26674C519FF164E38FB6FB05 /* DieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D037E83A0E685C7A8DF96E /* DieView.swift */; };
 		337F28D8FEABC0CF86C0C8F6 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7196ADFEED9D53C913B59B8D /* SheetView.swift */; };
 		3CC241EDA1557DABC42C32D1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B01780C7880B77D3AB03B8F /* Theme.swift */; };
 		4705CBC93BE96D5A9D361F51 /* ScorePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA052A4C1561875EEDBA9E0 /* ScorePickerView.swift */; };
 		4E3A864D1ACD77956F78BB80 /* YambCore in Frameworks */ = {isa = PBXBuildFile; productRef = A2C53CC1C0626C56773489A8 /* YambCore */; };
+		5D4E852114829559EF4981C5 /* chime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A9A1DAD71D2E6BE73AC0747 /* chime.wav */; };
 		82F7AB04C7597ACFC846FAF4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B0F93C1D2E178CB4C26A17 /* GameView.swift */; };
+		91BC1EEC09AC45B6C086A594 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5FF3D21A21FDEE09866C0 /* Settings.swift */; };
 		AA046C8CC0AF781867829D16 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F13489DFCC26990CCDF155 /* GameModel.swift */; };
+		C10756EBE2C62B1BCB2AF153 /* roll.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23319D36C0700D6C8FF76060 /* roll.wav */; };
 		E29DD36932306BC447881EB6 /* YambApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1783FE14EB4456E1FA3BA652 /* YambApp.swift */; };
+		EB153F6CF22AB1AB659C1C42 /* hold.wav in Resources */ = {isa = PBXBuildFile; fileRef = 387D9DCC5B11B202CF956BF5 /* hold.wav */; };
+		F8D0A2FCCB027133433DBDEC /* write.wav in Resources */ = {isa = PBXBuildFile; fileRef = 76E94738B14C2CB78F84C9DA /* write.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		09B0F93C1D2E178CB4C26A17 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		0B607022A792EE4DFC9CDC4E /* YAMB */ = {isa = PBXFileReference; lastKnownFileType = folder; name = YAMB; path = .; sourceTree = SOURCE_ROOT; };
 		1783FE14EB4456E1FA3BA652 /* YambApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YambApp.swift; sourceTree = "<group>"; };
+		23319D36C0700D6C8FF76060 /* roll.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roll.wav; sourceTree = "<group>"; };
+		387D9DCC5B11B202CF956BF5 /* hold.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hold.wav; sourceTree = "<group>"; };
 		5A71E64934B661AD5A9CB020 /* Yamb.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Yamb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B01780C7880B77D3AB03B8F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7196ADFEED9D53C913B59B8D /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		76E94738B14C2CB78F84C9DA /* write.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = write.wav; sourceTree = "<group>"; };
+		7E6D8BE0DAA276A76BFF245A /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		9A9A1DAD71D2E6BE73AC0747 /* chime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chime.wav; sourceTree = "<group>"; };
+		9B64453A02E676A93C9DCDD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9EA052A4C1561875EEDBA9E0 /* ScorePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePickerView.swift; sourceTree = "<group>"; };
+		ADB5FF3D21A21FDEE09866C0 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C9F13489DFCC26990CCDF155 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		E9D037E83A0E685C7A8DF96E /* DieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,12 +67,16 @@
 			isa = PBXGroup;
 			children = (
 				E9D037E83A0E685C7A8DF96E /* DieView.swift */,
+				7E6D8BE0DAA276A76BFF245A /* Feedback.swift */,
 				C9F13489DFCC26990CCDF155 /* GameModel.swift */,
 				09B0F93C1D2E178CB4C26A17 /* GameView.swift */,
 				9EA052A4C1561875EEDBA9E0 /* ScorePickerView.swift */,
+				ADB5FF3D21A21FDEE09866C0 /* Settings.swift */,
+				9B64453A02E676A93C9DCDD0 /* SettingsView.swift */,
 				7196ADFEED9D53C913B59B8D /* SheetView.swift */,
 				5B01780C7880B77D3AB03B8F /* Theme.swift */,
 				1783FE14EB4456E1FA3BA652 /* YambApp.swift */,
+				AF70D224793BEA084A1BB66B /* Sounds */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -80,6 +98,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AF70D224793BEA084A1BB66B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9A9A1DAD71D2E6BE73AC0747 /* chime.wav */,
+				387D9DCC5B11B202CF956BF5 /* hold.wav */,
+				23319D36C0700D6C8FF76060 /* roll.wav */,
+				76E94738B14C2CB78F84C9DA /* write.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -88,6 +117,7 @@
 			buildConfigurationList = A33669DA7397679A98F275FE /* Build configuration list for PBXNativeTarget "Yamb" */;
 			buildPhases = (
 				E3D19C7FB6342BEE14900F20 /* Sources */,
+				09732DFD78943EECB7F4CE3C /* Resources */,
 				FD7E06F46362C78A54EAC00A /* Frameworks */,
 			);
 			buildRules = (
@@ -138,15 +168,32 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		09732DFD78943EECB7F4CE3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D4E852114829559EF4981C5 /* chime.wav in Resources */,
+				EB153F6CF22AB1AB659C1C42 /* hold.wav in Resources */,
+				C10756EBE2C62B1BCB2AF153 /* roll.wav in Resources */,
+				F8D0A2FCCB027133433DBDEC /* write.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E3D19C7FB6342BEE14900F20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				26674C519FF164E38FB6FB05 /* DieView.swift in Sources */,
+				050E01CD98F10B3A7290BD09 /* Feedback.swift in Sources */,
 				AA046C8CC0AF781867829D16 /* GameModel.swift in Sources */,
 				82F7AB04C7597ACFC846FAF4 /* GameView.swift in Sources */,
 				4705CBC93BE96D5A9D361F51 /* ScorePickerView.swift in Sources */,
+				91BC1EEC09AC45B6C086A594 /* Settings.swift in Sources */,
+				2156B4C786BBFCD8363D8DD1 /* SettingsView.swift in Sources */,
 				337F28D8FEABC0CF86C0C8F6 /* SheetView.swift in Sources */,
 				3CC241EDA1557DABC42C32D1 /* Theme.swift in Sources */,
 				E29DD36932306BC447881EB6 /* YambApp.swift in Sources */,

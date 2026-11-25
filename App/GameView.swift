@@ -8,46 +8,55 @@ struct GameView: View {
     @State private var pendingCell: Cell?
     @State private var confirmNewGame = false
     @State private var pickingCell: Cell?
-    @AppStorage("showScorePreviews") private var showPreviews = true
+    @State private var showSettings = false
+    private var settings: AppSettings { AppSettings.shared }
 
     private var sheetOnly: Bool { model.mode == .sheetOnly }
 
     var body: some View {
         GeometryReader { geo in
-            let wide = geo.size.width > 760
+            // Side by side only when there's room for both (landscape iPad, Mac window).
+            let wide = geo.size.width > 900 && geo.size.width > geo.size.height
+            // Stacked layout: centred, at most 700 wide; rows fill the height left over.
+            let stackWidth = min(geo.size.width - 24, 700)
+            let stackRow = (geo.size.height - stackWidth / 6 - 260) / 17.5
             VStack(spacing: 0) {
                 topBar
                 if sheetOnly {
                     // Real dice: just the sheet, as big as fits.
                     ScrollView {
-                        sheet(rowHeight: max(26, min(44, (geo.size.height - 150) / 17.5)))
-                            .frame(maxWidth: 600)
+                        sheet(rowHeight: max(26, min(48, (geo.size.height - 150) / 17.5)))
+                            .frame(maxWidth: 760)
                             .frame(maxWidth: .infinity)
                     }
                     .scrollBounceBehavior(.basedOnSize)
                     .padding(.horizontal, 12)
                     .padding(.top, 8)
                 } else if wide {
-                    HStack(alignment: .top, spacing: 32) {
-                        VStack(spacing: 20) {
+                    // iPad / Mac: dice and buttons on the left, the sheet on the right.
+                    HStack(alignment: .top, spacing: 40) {
+                        VStack(spacing: 24) {
                             dice
                             buttons
                             Spacer()
                         }
-                        .frame(maxWidth: 420)
-                        sheet(rowHeight: max(27, min(40, (geo.size.height - 160) / 17)))
-                            .frame(maxWidth: 560)
+                        .frame(maxWidth: 460)
+                        sheet(rowHeight: max(27, min(46, (geo.size.height - 150) / 17.5)))
+                            .frame(minWidth: 480, maxWidth: 680)
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 32)
+                    .padding(.top, 12)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 } else {
                     VStack(spacing: 12) {
                         dice
                         buttons
-                        ScrollView { sheet(rowHeight: max(24, min(34, (geo.size.height - 300) / 17.5))) }
+                        ScrollView { sheet(rowHeight: max(24, min(46, stackRow))) }
                             .scrollBounceBehavior(.basedOnSize)
                     }
+                    .frame(maxWidth: stackWidth)
                     .padding(.horizontal, 12)
+                    .frame(maxWidth: .infinity)
                 }
                 turnBar
             }
@@ -65,6 +74,8 @@ struct GameView: View {
                  ? "How do you want to play?"
                  : "How do you want to play? The current game will be lost.")
         }
+        .sheet(isPresented: $showSettings) { SettingsView() }
+        .preferredColorScheme(settings.appearance.colorScheme)
         .sheet(item: $pickingCell) { cell in
             ScorePickerView(cell: cell, current: model.sheet[cell.column, cell.row]) { entry in
                 model.setEntry(entry, at: cell)
@@ -78,10 +89,7 @@ struct GameView: View {
         HStack {
             Menu {
                 Button("New game", systemImage: "arrow.counterclockwise") { confirmNewGame = true }
-                Divider()
-                Toggle(isOn: $showPreviews) {
-                    Label("Show score previews", systemImage: "lightbulb")
-                }
+                Button("Settings", systemImage: "gearshape") { showSettings = true }
             } label: {
                 Image(systemName: "line.3.horizontal")
                     .font(.title3.weight(.semibold))
@@ -162,7 +170,7 @@ struct GameView: View {
                   options: model.options,
                   announceable: model.announceable,
                   announced: model.turn.announced,
-                  showPreviews: showPreviews && !sheetOnly,
+                  showPreviews: settings.showPreviews && !sheetOnly,
                   filledCellsEditable: sheetOnly,
                   rowHeight: rowHeight) { cell in
             if sheetOnly { pickingCell = cell } else { pendingCell = cell }

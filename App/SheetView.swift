@@ -20,6 +20,13 @@ struct SheetView: View {
         case row(Row), upperSum, middleSum, lowerSum, total
     }
 
+    // Sizes scale with the row height, so the sheet grows on iPad and Mac.
+    private var fontSize: CGFloat { max(15, rowHeight * 0.52) }
+    private var labelWidth: CGFloat { max(62, rowHeight * 2.0) }
+    private var sumWidth: CGFloat { max(58, rowHeight * 1.8) }
+    private var labelFont: Font { .system(size: fontSize * 0.95, weight: .semibold) }
+    private var headerFont: Font { .system(size: fontSize * 0.8, weight: .bold) }
+
     private let lines: [Line] =
         Row.upper.map(Line.row) + [.upperSum] +
         Row.middle.map(Line.row) + [.middleSum] +
@@ -28,28 +35,28 @@ struct SheetView: View {
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             GridRow {
-                Color.clear.frame(width: 62, height: rowHeight)
+                Color.clear.frame(width: labelWidth, height: rowHeight)
                 ForEach(Column.allCases, id: \.self) { column in
                     header(column)
                 }
-                Text("Σ").font(.caption.bold()).foregroundStyle(.secondary)
-                    .frame(width: 58, height: rowHeight)
+                Text("Σ").font(headerFont).foregroundStyle(.secondary)
+                    .frame(width: sumWidth, height: rowHeight)
             }
             ForEach(lines, id: \.self) { line in
                 GridRow { lineCells(line) }
             }
         }
-        .font(.system(size: 15, weight: .medium, design: .rounded).monospacedDigit())
+        .font(.system(size: fontSize, weight: .medium, design: .rounded).monospacedDigit())
     }
 
     @ViewBuilder
     private func header(_ column: Column) -> some View {
         Group {
             switch column {
-            case .down: Image(systemName: "arrow.down").fontWeight(.bold)
-            case .up: Image(systemName: "arrow.up").fontWeight(.bold)
-            case .free: Text("Free").font(.caption.bold())
-            case .announce: Text("Ann").font(.caption.bold())
+            case .down: Image(systemName: "arrow.down").font(headerFont)
+            case .up: Image(systemName: "arrow.up").font(headerFont)
+            case .free: Text("Free").font(headerFont)
+            case .announce: Text("Ann").font(headerFont)
             }
         }
         .foregroundStyle(Theme.accent)
@@ -76,34 +83,34 @@ struct SheetView: View {
                 Row.lower.contains { sheet[col, $0] != nil } ? sheet.lowerSum(col) : nil
             }
         case .total:
-            Text("Total").font(.subheadline.bold())
-                .frame(width: 62, height: rowHeight + 8, alignment: .leading)
+            Text("Total").font(labelFont)
+                .frame(width: labelWidth, height: rowHeight + 8, alignment: .leading)
                 .padding(.leading, 6)
             Color.clear.frame(height: rowHeight + 8).gridCellColumns(4)
             Text("\(sheet.total)")
-                .font(.system(size: 17, weight: .bold, design: .rounded).monospacedDigit())
-                .frame(width: 58, height: rowHeight + 8)
+                .font(.system(size: fontSize * 1.15, weight: .bold, design: .rounded).monospacedDigit())
+                .frame(width: sumWidth, height: rowHeight + 8)
                 .background(Theme.accent.opacity(0.18), in: RoundedRectangle(cornerRadius: 6))
         }
     }
 
     private func label(_ text: String) -> some View {
         Text(text)
-            .font(.subheadline.weight(.semibold))
-            .frame(width: 62, height: rowHeight, alignment: .leading)
+            .font(labelFont)
+            .frame(width: labelWidth, height: rowHeight, alignment: .leading)
             .padding(.leading, 6)
     }
 
     private func blank() -> some View {
         // The Σ column only has cells on the sum rows and the total.
-        Color.clear.frame(width: 58, height: rowHeight)
+        Color.clear.frame(width: sumWidth, height: rowHeight)
     }
 
     private func sumCells(_ title: String, total: Int, value: (Column) -> Int?) -> some View {
         let values = Column.allCases.map(value)
         return Group {
-            Text(title).font(.subheadline.bold())
-                .frame(width: 62, height: rowHeight, alignment: .leading)
+            Text(title).font(labelFont)
+                .frame(width: labelWidth, height: rowHeight, alignment: .leading)
                 .padding(.leading, 6)
             ForEach(Column.allCases, id: \.self) { column in
                 Text(values[column.rawValue].map(String.init) ?? "")
@@ -112,7 +119,7 @@ struct SheetView: View {
                     .overlay(Rectangle().strokeBorder(Theme.grid, lineWidth: 0.5))
             }
             Text("\(total)").fontWeight(.bold)
-                .frame(width: 58, height: rowHeight)
+                .frame(width: sumWidth, height: rowHeight)
                 .overlay(Rectangle().strokeBorder(Theme.grid, lineWidth: 0.5))
         }
         .background(Theme.sumRow)

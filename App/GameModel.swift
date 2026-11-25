@@ -75,13 +75,36 @@ final class GameModel {
         let rolling = turn.dice.indices.filter { all || turn.rollCount == 0 || !turn.held.contains($0) }
         guard (try? game.roll(all: all)) != nil else { return }
         for i in rolling { spins[i] += 1 }
+        Feedback.shared.play(.roll)
     }
 
-    func toggleHold(_ index: Int) { game.toggleHold(index) }
+    func toggleHold(_ index: Int) {
+        guard turn.hasRolled else { return }
+        game.toggleHold(index)
+        Feedback.shared.play(.hold)
+    }
 
-    func announce(_ row: Row) { try? game.announce(row) }
+    func announce(_ row: Row) {
+        guard (try? game.announce(row)) != nil else { return }
+        Feedback.shared.play(.hold)
+    }
 
-    func write(_ cell: Cell, crossOut: Bool) { _ = try? game.write(cell, crossOut: crossOut) }
+    func write(_ cell: Cell, crossOut: Bool) {
+        guard let entry = try? game.write(cell, crossOut: crossOut) else { return }
+        playWriteFeedback(entry, row: cell.row)
+    }
+
+    private func playWriteFeedback(_ entry: Entry?, row: Row) {
+        if game.isFinished {
+            Feedback.shared.play(.gameOver)
+        } else if row == .yamb, case .score = entry {
+            Feedback.shared.play(.yamb)
+        } else if entry == .crossed {
+            Feedback.shared.play(.crossOut)
+        } else {
+            Feedback.shared.play(.write)
+        }
+    }
 
     // MARK: Sheet only
 
@@ -90,6 +113,7 @@ final class GameModel {
         var sheet = game.sheet
         sheet.set(entry, at: cell)
         game = PlayerGame(sheet: sheet)
+        playWriteFeedback(entry, row: cell.row)
     }
 
     // MARK: -
